@@ -131,7 +131,7 @@ func parseInteger(d *decodeState, v reflect.Value) error {
 	switch v.Kind() {
 	case reflect.Interface:
 		n, err := strconv.ParseInt(s, 10, 64)
-		if err != nil || v.OverflowInt(n) {
+		if err != nil {
 			return newError("cannot unmarshal a bencode %s into a %s", v, v.Type)
 		}
 		v.Set(reflect.ValueOf(n))
