@@ -208,10 +208,10 @@ func parseDict(d *decodeState, v reflect.Value) error {
 			} else if !end {
 				return fmt.Errorf("missing value for key %q", key)
 			}
-			if value.IsNil() {
-				value.Set(reflect.MakeMap(value.Type()))
+			if v.IsNil() {
+				v.Set(reflect.MakeMap(v.Type()))
 			}
-			value.SetMapIndex(reflect.ValueOf(key).Convert(value.Type().Key()), value)
+			v.SetMapIndex(reflect.ValueOf(key).Convert(v.Type().Key()), value)
 		case reflect.Struct:
 			sf, ok := getStructFieldForKey(v.Type(), key)
 			if !ok || sf.r.PkgPath != "" {
